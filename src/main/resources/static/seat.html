@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选座购票</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="/static/css/amazeui.min.css">
+    <link rel="stylesheet" href="/static/css/petshow.css?6">
+    <link rel="stylesheet" href="/static/css/animate.min.css">
+    <link rel="stylesheet" href="/css/seat.css">
+    <script src="/js/jquery-3.3.1.js"></script>
+    <script src="/static/js/amazeui.min.js"></script>
+</head>
+
+
+<body>
+<div id="app">
+    <header class="am-topbar am-topbar-inverse">
+        <div class="amz-container">
+            <h1 class="am-topbar-brand">
+                <a href="#" class="am-topbar-logo">
+                    <img src="/static/img/logo.png?1" alt="">
+                </a>
+            </h1>
+            <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
+                    data-am-collapse="{target: '#doc-topbar-collapse-5'}">
+            <span class="am-sr-only">
+                导航切换
+            </span>
+                <span class="am-icon-bars">
+            </span>
+            </button>
+            <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse-5">
+                <ul class="am-nav am-nav-pills am-topbar-nav">
+                    <li class="am-active">
+                        <a href="#">
+                            首页
+                        </a>
+                    </li>
+                    <li class="am-dropdown" data-am-dropdown="">
+                        <a class="am-dropdown-toggle" data-am-dropdown-toggle="" href="javascript:;">
+                            发现萌宠
+                            <span class="am-icon-caret-down">
+                        </span>
+                        </a>
+                        <ul class="am-dropdown-content">
+                            <li>
+                                <a href="#">
+                                    编辑推荐
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    人气排行
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    最新发布
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    语音涂鸦
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            萌宠趣闻
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            萌宠专题
+                        </a>
+                    </li>
+                    <li class="am-dropdown" data-am-dropdown="">
+                        <a class="am-dropdown-toggle" data-am-dropdown-toggle="" href="javascript:;">
+                            萌宠服务
+                            <span class="am-icon-caret-down">
+                        </span>
+                        </a>
+                        <ul class="am-dropdown-content">
+                            <li>
+                                <a href="#">
+                                    宠物医院
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    宠物美容
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    宠物店铺
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    更多服务
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="container">
+
+        <h2 class="title"><a href="http://www.jq22.com/jquery-info2692">jQuery在线选座(影院版)</a></h2>
+
+        <div class="demo clearfix">
+
+            <!---左边座位列表----->
+
+            <div id="seat_area" class="seatCharts-container" tabindex="0" aria-activedescendant="8_5">
+
+
+                <div class="front">屏幕</div>
+
+                <div class="seatCharts-row" v-for="(row,rowIndex) in 10">
+                    <div class="seatCharts-cell seatCharts-space" v-text="rowIndex+1"></div>
+                    <div  @click="chooseSeat($event)" v-for="(col,colIndex) in 10" :id="(rowIndex+1)+'_'+(colIndex+1)" role="checkbox" aria-checked="false" focusable="true" tabindex="-1"
+                         class="seatCharts-seat seatCharts-cell available" v-text="colIndex+1">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!---右边选座信息----->
+
+            <div class="booking_area">
+
+                <p>电影：<span v-text="movie.moviename"></span></p>
+
+                <p>时间：<span>03月35日 22:15</span></p>
+
+                <p>座位：</p>
+
+                <ul id="seats_chose">
+                    <li id="cart-item-5_5" v-for="seat in selectedSeats" v-text="formatSeat(seat)"></li>
+                </ul>
+
+                <p>票数：<span id="tickects_num"></span></p>
+
+                <p>总价：<b>￥<span id="total_price"></span></b></p>
+
+                <input type="button" class="btn" @click="addOrder" value="确定购买">
+
+
+                <div id="legend" class="seatCharts-legend">
+                    <ul class="seatCharts-legendList">
+                        <li class="seatCharts-legendItem">
+                            <div class="seatCharts-seat seatCharts-cell available"></div>
+                            <span class="seatCharts-legendDescription">可选座</span></li>
+                        <li class="seatCharts-legendItem">
+                            <div class="seatCharts-seat seatCharts-cell unavailable"></div>
+                            <span class="seatCharts-legendDescription">已售出</span></li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <footer class="am_footer">
+        <div class="am_footer_con">
+            <div class="am_footer_link">
+                <span>关于宠物秀</span>
+                <ul>
+                    <li><a href="###">关于我们</a></li>
+                    <li><a href="###">发展历程</a></li>
+                    <li><a href="###">友情链接</a></li>
+                </ul>
+            </div>
+
+
+            <div class="am_footer_don">
+                <span>宠物秀</span>
+                <dl>
+                    <dt><img src="/static/img/footdon.png?1" alt=""></dt>
+                    <dd>一起Show我们的爱宠吧！宠物秀是图片配文字、涂鸦、COSPLAY的移动手机社区，这里有猫狗鱼龟兔子仓鼠龙猫等各种萌图。
+                        <a href="###" class="footdon_pg ">
+                            <div class="foot_d_pg am-icon-apple "> App store</div>
+                        </a><a href="###" class="footdon_az animated">
+                            <div class="foot_d_az am-icon-android "> Android</div>
+                        </a></dd>
+                </dl>
+            </div>
+
+            <div class="am_footer_erweima">
+                <div class="am_footer_weixin"><img src="/static/img/wx.jpg" alt="">
+                    <div class="am_footer_d_gzwx am-icon-weixin"> 关注微信</div>
+                </div>
+                <div class="am_footer_ddon"><img src="/static/img/wx.jpg" alt="">
+                    <div class="am_footer_d_dxz am-icon-cloud-download"> 扫码下载</div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="am_info_line">Copyright(c)2015 <span>PetShow</span> All Rights Reserved</div>
+    </footer>
+</div>
+<script>
+    $(function () {
+        if ($(window).width() < 600) {
+            $('.am_list_item_text').each(
+                function () {
+                    if ($(this).text().length >= 26) {
+                        $(this).html($(this).text().substr(0, 26) + '...');
+                    }
+                });
+        }
+        []
+
+    });
+
+</script>
+
+<script src="/js/app/getUrlParam.js"></script>
+<script src="/js/vue.js"></script>
+<script src="/js/app/seat.js"></script>
+</body>
+</html>

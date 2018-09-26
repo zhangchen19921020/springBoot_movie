@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <title>电影排期</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="/static/css/amazeui.min.css">
+    <link rel="stylesheet" href="/static/css/petshow.css?6">
+    <link rel="stylesheet" href="/static/css/animate.min.css">
+
+
+    <style type="text/css">
+        .spanStyle {
+            /*white-space: nowrap;  !*强制span不换行*!*/
+            display: inline-block; /*将span当做块级元素对待*/
+            width: 500px; /*限制宽度*/
+            overflow: hidden; /*超出宽度部分隐藏*/
+            text-overflow: ellipsis; /*超出部分以点号代替*/
+            line-height: 1; /*数字与之前的文字对齐*/
+        }
+    </style>
+
+
+    <script type="text/javascript">
+
+
+    </script>
+
+</head>
+<body>
+<div id="app">
+    <header class="am-topbar am-topbar-inverse">
+        <div class="amz-container">
+            <h1 class="am-topbar-brand">
+                <a href="#" class="am-topbar-logo">
+                    <img src="/img/logo.png?1" alt="">
+                </a>
+            </h1>
+            <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
+                    data-am-collapse="{target: '#doc-topbar-collapse-5'}">
+            <span class="am-sr-only">
+                导航切换
+            </span>
+                <span class="am-icon-bars">
+            </span>
+            </button>
+            <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse-5">
+                <ul class="am-nav am-nav-pills am-topbar-nav">
+                    <li class="am-active">
+                        <a href="#">
+                            首页
+                        </a>
+                    </li>
+                    <li class="am-dropdown" data-am-dropdown="">
+                        <a class="am-dropdown-toggle" data-am-dropdown-toggle="" href="javascript:;">
+                            发现萌宠
+                            <span class="am-icon-caret-down">
+                        </span>
+                        </a>
+                        <ul class="am-dropdown-content">
+                            <li>
+                                <a href="#">
+                                    编辑推荐
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    人气排行
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    最新发布
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    语音涂鸦
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            萌宠趣闻
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            萌宠专题
+                        </a>
+                    </li>
+                    <li class="am-dropdown" data-am-dropdown="">
+                        <a class="am-dropdown-toggle" data-am-dropdown-toggle="" href="javascript:;">
+                            萌宠服务
+                            <span class="am-icon-caret-down">
+                        </span>
+                        </a>
+                        <ul class="am-dropdown-content">
+                            <li>
+                                <a href="#">
+                                    宠物医院
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    宠物美容
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    宠物店铺
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    更多服务
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div>
+        <!--电影信息 start-->
+        <div class="am-g ztlb_nr ztlb_nr_list">
+            <div class="am-u-sm-12">
+                <div class="ztlb_nr_block">
+
+                    <div class="ztlb_nr_block_l">
+                        <img :src="'/images/'+movie.picpath" style="border-radius: 10%"
+                             alt="12345678">
+                    </div>
+
+                    <div class="ztlb_nr_block_r">
+                        <div class="ztlb_nr_block_r_info">
+                            <div class="ztlb_nr_block_r_info_l">
+                                <div class="ztlb_nr_block_r_info_num">37</div>
+                                <div>收录</div>
+                            </div>
+                            <div class="ztlb_nr_block_r_info_r">
+                                <div class="ztlb_nr_block_r_info_num">182</div>
+                                <div>人气</div>
+                            </div>
+                        </div>
+                        <a class="ztlb_nr_block_r_title spanStyle" v-text="movie.moviename"></a>
+                        <span class="ztlb_nr_block_r_nr spanStyle" v-text="movie.desc"></span>
+
+                    </div>
+                </div>
+
+                <div class="ztlb_nr_block_r_info_copy_bg">
+                    <span>收录：82</span>
+                    <span>人气：74</span>
+                </div>
+                <div class="ztlb_nr_block_r_info_copy">
+
+                </div>
+
+
+            </div>
+
+        </div>
+        <!--电影信息 end-->
+
+        <div data-am-tabs data-am-widget="tabs" class="am-tabs am-tabs-d2 am_news_tab" style="padding-top: 20px">
+            <ul class="am-tabs-nav am-cf am_cf">
+
+                <li v-for="(item,index) in showDays" v-bind:class="{'am-active':index==0}">
+                    <a href="javascript: void(0)" v-text="item.showDayCol"></a>
+                </li>
+
+
+            </ul>
+
+
+            <div class="am-tabs-bd">
+
+                <!--放映时间段模板-->
+
+                <div  v-for="showTimes in showTimeList" class="am-tab-panel">
+                    <div class="am-list-news-bd am_news_list_all">
+
+                        <table class="am-table am-table-striped am-table-hover">
+                            <thead>
+                            <tr>
+                                <th>放映时间</th>
+                                <th>语言版本</th>
+                                <th>放映厅</th>
+                                <th>售价（元）</th>
+                                <th>选座购票</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="showTime in showTimes">
+                                <td  v-text="showTime.showTimeCol"></td>
+                                <td v-text="showTime.language"></td>
+                                <td v-text="showTime.showPlace"></td>
+                                <td style="color: red;font-size: large" v-text="movie.price"></td>
+                                <td>
+                                    <a target="_blank">
+                                        <button type="button" @click="toSeat(showTime.id,movie.id)" class="am-btn am-btn-danger am-round">选座购票</button>
+                                    </a>
+                                </td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+<script src="/js/jquery-3.3.1.js"></script>
+<script src="/static/js/amazeui.min.js"></script>
+<script src="/static/js/amazeui.lazyload.min.js"></script>
+
+
+<script src="/js/app/getUrlParam.js"></script>
+<script src="/js/vue.js"></script>
+<script src="/js/app/buyticket.js"></script>
+
+</body>
+</html>

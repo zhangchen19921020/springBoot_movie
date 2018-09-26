@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dayuan.mapper.OrderInfoMapper">
+  <resultMap id="BaseResultMap" type="com.dayuan.entity.OrderInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="seat" jdbcType="VARCHAR" property="seat" />
+    <result column="price" jdbcType="VARCHAR" property="price" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, create_time, seat, price, order_id
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <!--订单详情-->
+  <insert id="insertOderInfo" keyProperty="id" useGeneratedKeys="true">
+        insert into order_info (seat, price,order_id)
+          values ( #{seat}, #{price},#{orderId})
+    </insert>
+
+
+
+</mapper>

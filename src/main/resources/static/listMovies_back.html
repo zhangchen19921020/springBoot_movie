@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>大猿国际影城</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" th:href="@{/static/css/amazeui.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/petshow.css?6}">
+    <link rel="stylesheet" th:href="@{/static/css/animate.min.css}">
+    <script th:src="@{/static/js/jquery.min.js}"></script>
+    <script th:src="@{/static/js/amazeui.min.js}"></script>
+    <script th:src="@{/static/js/countUp.min.js}"></script>
+
+
+</head>
+<body>
+<div id = "app">
+<header class="am-topbar am-topbar-inverse">
+    <div class="amz-container">
+        <h1 class="am-topbar-brand">
+            <a href="#" class="am-topbar-logo">
+                <img th:src="@{/static/img/logo.png?1}" alt="">
+            </a>
+        </h1>
+        <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
+                data-am-collapse="{target: '#doc-topbar-collapse-5'}">
+            <span class="am-sr-only">
+                导航切换
+            </span>
+            <span class="am-icon-bars">
+            </span>
+        </button>
+        <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse-5">
+            <ul class="am-nav am-nav-pills am-topbar-nav">
+                <li class="am-active">
+                    <a href="#">
+                        首页
+                    </a>
+                </li>
+
+                <li class="am-dropdown" data-am-dropdown="">
+                    <a class="am-dropdown-toggle" data-am-dropdown-toggle="" href="javascript:;">
+                        充值服务
+                        <span class="am-icon-caret-down">
+                        </span>
+                    </a>
+                    <ul class="am-dropdown-content">
+                        <li>
+                            <a href="#">
+                                编辑推荐
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                人气排行
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                最新发布
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                语音涂鸦
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li class="am-dropdown" data-am-dropdown="">
+                    <a class="am-dropdown-toggle" data-am-dropdown-toggle="" href="javascript:;">
+                        用户管理
+                        <span class="am-icon-caret-down">
+                        </span>
+                    </a>
+                    <ul class="am-dropdown-content">
+                        <li>
+                            <a th:href="@{/signup.html}">
+                                用户注册
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/login.html}">
+                                用户登陆
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+<div class="get">
+    <div class="am-g">
+        <div class="am-u-lg-12">
+            <div class="get-title">
+                <div class="get_font_left"><img th:src="@{/static/img/font_yjy.png}" alt=""></div>
+                <div class="get_font_center" id="banner_num"></div>
+                <div class="get_font_rigth"><img th:src="@{/static/img/font_zty.png}" alt=""></div>
+            </div>
+
+            <div class="font_line"><img th:src="@{/static/img/font_line.png}" alt=""></div>
+            <p>
+                <a href="###" class="am-btn am-btn-sm get-btn  am-radius banner_ios am-icon-apple"> App store</a> <a
+                    href="###" class="am-btn am-btn-sm  am-radius get-btn banner_android am-icon-android"> Android</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="banner_navbg">
+    <div class="am-g">
+        <div class="banner_nav"><span class="am-icon-caret-right">  筛选：</span><a href="###">人气最高</a><a href="###"
+                                                                                                       class="banner_hover">编辑推荐</a><a
+                href="###">最新萌宠</a><a href="###">语言涂鸦</a></div>
+    </div>
+</div>
+
+<div class="am-g am-imglist">
+    <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
+  am-avg-md-3 am-avg-lg-6 am-gallery-default">
+
+        <!--&lt;!&ndash;电影渲染 start&ndash;&gt;-->
+        <!--<li v-for="movie in movies">-->
+            <!--<div class="am-gallery-item am_list_block">-->
+                <!--<a :href="'info.html?id='+movie.id" class="am_img_bg">-->
+                    <!--<img class="am_img animated"-->
+                         <!--:src="'/images/'+movie.picpath"-->
+
+                         <!--alt="远方 有一个地方 那里种有我们的梦想"/>-->
+
+                <!--</a>-->
+
+                <!--<div class="am_listimg_info"><span class="am-icon-heart"> 132</span><span-->
+                        <!--class="am-icon-comments"> 67</span><span class="am_imglist_time">15分钟前</span></div>-->
+
+            <!--</div>-->
+            <!--<a class="am_imglist_user"><span class="am_imglist_user_ico"><img src="/static/img/tx.jpg" alt=""></span><span-->
+                    <!--class="am_imglist_user_font" v-text="movie.moviename"></span></a>-->
+        <!--</li>-->
+        <!--&lt;!&ndash;电影渲染 end&ndash;&gt;-->
+
+
+        <li th:each="movie : ${movieLists}">
+
+            <!--<div class="am-gallery-item am_list_block">-->
+                <!--&lt;!&ndash;<a th:href="'info.html?id='+movie.id" class="am_img_bg">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<img class="am_img animated"&ndash;&gt;-->
+                         <!--&lt;!&ndash;th:src="@{'/images/'+movie.picpath}"&ndash;&gt;-->
+
+                         <!--&lt;!&ndash;alt="远方 有一个地方 那里种有我们的梦想"/>&ndash;&gt;-->
+
+                <!--&lt;!&ndash;</a>&ndash;&gt;-->
+                <!--hhhhh-->
+                <!--<div class="am_listimg_info"><span class="am-icon-heart"> 132</span><span-->
+                        <!--class="am-icon-comments"> 67</span><span class="am_imglist_time">15分钟前</span></div>-->
+
+            <!--</div>-->
+
+            <!--&lt;!&ndash;<a class="am_imglist_user"><span class="am_imglist_user_ico"><img th:src="@{/static/img/tx.jpg}" alt=""></span><span&ndash;&gt;-->
+                    <!--&lt;!&ndash;class="am_imglist_user_font" th:text="movie.moviename"></span></a>&ndash;&gt;-->
+
+        </li>
+
+
+    </ul>
+</div>
+
+
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dayuan.mapper.ShowDayMapper">
+  <resultMap id="BaseResultMap" type="com.dayuan.entity.ShowDay">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="movie_id" jdbcType="INTEGER" property="movieId" />
+    <result column="show_day_col" jdbcType="VARCHAR" property="showDayCol" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, movie_id, show_day_col
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from show_day
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from show_day
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <select id="selectDateByMovieId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from show_day
+    where movie_id = #{movieId} order by show_day_col
+  </select>
+
+
+</mapper>

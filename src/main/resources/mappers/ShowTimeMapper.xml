@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dayuan.mapper.ShowTimeMapper">
+  <resultMap id="BaseResultMap" type="com.dayuan.entity.ShowTime">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="show_time_col" jdbcType="VARCHAR" property="showTimeCol" />
+    <result column="show_day_id" jdbcType="INTEGER" property="showDayId" />
+    <result column="language" jdbcType="VARCHAR" property="language" />
+    <result column="show_place" jdbcType="VARCHAR" property="showPlace" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, show_time_col, show_day_id, language, show_place
+  </sql>
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from show_time
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectShowTimeByDateId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from show_time
+    where  show_day_id= #{showDayId}
+  </select>
+
+
+
+</mapper>
